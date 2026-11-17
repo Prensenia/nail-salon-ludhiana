@@ -6,9 +6,12 @@ A polished, single-page launch site for **Nail Salon Ludhiana** (Pakhowal Road &
 
 ```
 nail-salon-ludhiana/
-├── index.html      # All content + SEO/Google structured data
-├── css/style.css   # Dark-luxe theme, fully responsive
-└── js/main.js      # Preloader, reveal animations, counters, lightbox, slider
+├── index.html      # Home: services, gallery, reviews, FAQ, branches + SEO structured data
+├── booking.html    # Booking form → sends pre-filled request to the salon's WhatsApp
+├── css/style.css   # Dark-luxe theme, sidebar layout, animations, fully responsive
+├── js/main.js      # Sidebar, reveals, counters, parallax, tilt, lightbox, slider
+├── js/booking.js   # Booking form validation + WhatsApp compose
+└── serve.ps1       # Optional zero-dependency local preview server (PowerShell)
 ```
 
 No build tools needed — it's plain HTML/CSS/JS. Open `index.html` in any browser, or serve the folder.
