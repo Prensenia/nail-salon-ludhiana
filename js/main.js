@@ -137,8 +137,8 @@
   /* ── Hero collage: gentle pointer parallax ─────────────── */
   const visual = $("#heroVisual");
   if (visual && !reducedMotion && matchMedia("(pointer: fine)").matches) {
-    const layers = $$(".polaroid", visual);
-    const factors = [10, 18, 26];
+    const layers = $$(".arch", visual);
+    const factors = [14, 8, 22];
     let raf = null;
     visual.addEventListener("pointermove", (e) => {
       if (raf) return;
@@ -155,6 +155,28 @@
     });
     visual.addEventListener("pointerleave", () => {
       layers.forEach((el) => (el.style.translate = "0px 0px"));
+    });
+  }
+
+  /* ── 3D tilt on service / step cards ──────────────────── */
+  if (!reducedMotion && matchMedia("(pointer: fine)").matches) {
+    $$(".card, .step").forEach((el) => {
+      const lift = el.classList.contains("card") ? -8 : -6;
+      el.addEventListener("pointermove", (e) => {
+        if (el._tRaf) return;
+        el._tRaf = requestAnimationFrame(() => {
+          const r = el.getBoundingClientRect();
+          const x = (e.clientX - r.left) / r.width - 0.5;
+          const y = (e.clientY - r.top) / r.height - 0.5;
+          el.style.transform =
+            `perspective(750px) rotateX(${(-y * 5).toFixed(2)}deg) rotateY(${(x * 5).toFixed(2)}deg) translateY(${lift}px)`;
+          el._tRaf = null;
+        });
+      });
+      el.addEventListener("pointerleave", () => {
+        if (el._tRaf) { cancelAnimationFrame(el._tRaf); el._tRaf = null; }
+        el.style.transform = "";
+      });
     });
   }
 
