@@ -14,6 +14,10 @@
   --rose-hot: #f27fa5;
   --gold: #d9b26a;
   --grad-rose: linear-gradient(135deg, #f7b9cd 0%, #e46e97 55%, #b33e67 100%);
+  /* Animated background glow layers */
+  --bg-glow-a: radial-gradient(600px 600px at 20% -10%, rgba(231, 154, 181, 0.14), transparent 55%);
+  --bg-glow-b: radial-gradient(700px 700px at 110% 30%, rgba(217, 178, 106, 0.1), transparent 55%);
+  --bg-glow-c: radial-gradient(500px 500px at 40% 110%, rgba(156, 103, 190, 0.08), transparent 55%);
   --radius: 22px;
   --shadow: 0 30px 60px -18px rgba(0, 0, 0, 0.55);
   --nav-h: 64px;
@@ -34,7 +38,34 @@ body {
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  position: relative;
 }
+
+/* ── Animated background mesh (dark-luxe, subtle) ──────────── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    var(--bg-glow-a),
+    var(--bg-glow-b),
+    var(--bg-glow-c),
+    var(--bg);
+  background-size: 200% 200%, 200% 200%, 200% 200%, auto;
+  animation: bg-drift 24s ease-in-out infinite alternate, bg-pulse 10s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes bg-drift {
+  0% { background-position: 0% 30%, 100% 60%, 60% 100%, 0 0; }
+  100% { background-position: 100% 70%, 0% 40%, 40% 0%, 0 0; }
+}
+@keyframes bg-pulse {
+  0%   { opacity: 1; filter: brightness(1); }
+  100% { opacity: 0.85; filter: brightness(1.06); }
+}
+
 img { display: block; max-width: 100%; height: auto; }
 a { color: inherit; text-decoration: none; }
 ul { list-style: none; }
