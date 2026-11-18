@@ -9,7 +9,9 @@
   const $ = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => [...c.querySelectorAll(s)];
   const px = (id, w = 800) =>
-    `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${w}`;
+    typeof id === "string" && (id.startsWith("images/") || id.startsWith("http"))
+      ? id
+      : `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${w}`;
 
   /* ── Service database (no prices — quoted on call/WhatsApp) ── */
   const SERVICES = {
@@ -41,8 +43,8 @@
       ],
       note: "First full set takes the longest — book a late-afternoon slot, settle in, and let us work. Infills every 2–3 weeks keep the set looking day-one fresh.",
       examples: [
-        { id: 34971940, cap: "Teal almond set · hand-painted" },
-        { id: 34885844, cap: "Coral set · charm detail" },
+        { id: "images/hero-main.jpg", cap: "Burgundy velvet cat-eye · long almond" },
+        { id: "images/hero-secondary.jpg", cap: "Glazed chrome · crystal French almond" },
         { id: 7683058, cap: "Classic red · medium almond" }
       ],
       bookingParam: "Nail extensions"
@@ -127,7 +129,7 @@
         "A proper pedicure is self-care, not just a colour change. Warm soak, full exfoliation, callus care where it's needed, nail and cuticle work, then a foot and calf massage that erases the week. You'll leave with polished toes and genuinely lighter feet — open-footwear season or not.",
       facts: ["≈ 50–70 min", "Regular or gel on toes", "Massage included", "Both branches"],
       heroImg: 34930135,
-      heroAlt: "Client relaxing while receiving a professional pedicure at the salon",
+      heroAlt: "Pedicure treatment happening in salon chair",
       included: [
         "Warm, relaxing foot soak",
         "Toenails shaped, cuticles tidied",
@@ -146,8 +148,8 @@
       ],
       note: "Book gel toes before wedding or trip season — one sitting covers weeks of mehndi functions, travel and open shoes.",
       examples: [
+        { id: "images/luxe-pedicure.jpg", cap: "Copper bowl soak · floral spa pedicure" },
         { id: 34930123, cap: "Pedicure in progress · salon chair" },
-        { id: 18441299, cap: "Pink polish · gloved precision" },
         { id: 31091766, cap: "Full service · start to finish" }
       ],
       bookingParam: "Luxe pedicure"
@@ -161,8 +163,8 @@
       intro:
         "Nail art is where our artists get to show off. Hand-painted designs, chrome and mirror finishes, magnetic cat-eye, French remixes, ombré and marble, charms and 3D decor — if you've saved it, we can probably recreate it. Art is priced by the design, so we'll quote it at your consultation before a single brush moves.",
       facts: ["≈ 1–2.5 hrs · by design", "Quote on WhatsApp", "Bring inspo pics", "Both branches"],
-      heroImg: 18730147,
-      heroAlt: "Ornate black and gold hand-painted nail art with embellishments",
+      heroImg: 15001876,
+      heroAlt: "Short nude almond nails with gold rings — custom nail art close-up",
       included: [
         "Design consultation — we look at your inspo and plan the set",
         "Base colour application",
@@ -181,9 +183,9 @@
       ],
       note: "Send us your inspo pic on WhatsApp before booking — we'll tell you exactly what's possible on your length and shape, and what it'll take.",
       examples: [
-        { id: 7066298, cap: "Hand-painted dots · playful classic" },
-        { id: 5871824, cap: "Vibrant art · editorial colour-block" },
-        { id: 5871834, cap: "Neon UV art · after-dark set" }
+        { id: "images/custom-nail-art.jpg", cap: "Mauve 3D floral · sculpted almond" },
+        { id: "images/hero-main.jpg", cap: "Burgundy velvet cat-eye · gold leaf" },
+        { id: "images/studio-feature.jpg", cap: "Blush aura · chrome swirls & pearls" }
       ],
       bookingParam: "Custom nail art"
     },
@@ -196,8 +198,8 @@
       intro:
         "Wedding functions are marathon days for your hands — mehndi, rings, a thousand photos, everyone grabbing your henna-ed fingers. We plan bridal sets properly: a consultation to match your outfits, an optional trial set, and nail art designed to sit beautifully next to your mehndi rather than fight it. Full squads for sangeet and ladies' functions welcome — we'll schedule the whole party.",
       facts: ["Book 1–2 weeks ahead", "Trial sets available", "Group bookings welcome", "Both branches"],
-      heroImg: 12600630,
-      heroAlt: "Bride's hand with detailed mehndi and colourful bridal nail art",
+      heroImg: 16413927,
+      heroAlt: "Bridal hands with red nails mehndi henna and gold jewelry",
       included: [
         "One-on-one consultation — outfits, dates and functions mapped out",
         "Shade and design matching to your lehenga and jewellery",
@@ -216,9 +218,9 @@
       ],
       note: "Bridal and group bookings get a dedicated WhatsApp thread — send outfit pics and dates, and we'll plan every function's set with you.",
       examples: [
+        { id: "images/bridal-occasion.jpg", cap: "Bridal red & gold · mehndi-ready almond set" },
         { id: 15491629, cap: "Classic red on gold · reception-ready" },
-        { id: 18730147, cap: "Black & gold · sangeet statement" },
-        { id: 5871824, cap: "Party art · bold colour" }
+        { id: "images/hero-main.jpg", cap: "Burgundy velvet cat-eye · sangeet statement" }
       ],
       bookingParam: "Bridal / occasion set"
     }
